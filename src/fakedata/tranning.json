@@ -1,0 +1,62 @@
+[
+    {
+      "id": "1",
+      "Organizing Unit": "Science Fiction Book Club",
+      "Trainers": "None",
+      "Content": "Discussion and analysis of top science fiction books."
+    },
+    {
+      "id": "2",
+      "Organizing Unit": "Sci-Fi Writers Association",
+      "Trainers": "Various authors",
+      "Content": "Workshops and seminars on science fiction writing techniques."
+    },
+    {
+      "id": "3",
+      "Organizing Unit": "Interstellar University",
+      "Trainers": "Professor James T. Kirk",
+      "Content": "Lectures on the impact of science fiction on space exploration."
+    },
+    {
+      "id": "4",
+      "Organizing Unit": "Futuristic Technologies Institute",
+      "Trainers": "Dr. Emmett Brown",
+      "Content": "Exploration of real-world technologies inspired by science fiction."
+    },
+    {
+      "id": "5",
+      "Organizing Unit": "Time Travelers Society",
+      "Trainers": "The Doctor",
+      "Content": "Discussions on the philosophical implications of time travel in science fiction."
+    },
+    {
+      "id": "6",
+      "Organizing Unit": "Astrobiology Research Center",
+      "Trainers": "Dr. Ellie Arroway",
+      "Content": "Exploration of extraterrestrial life concepts in science fiction literature."
+    },
+    {
+      "id": "7",
+      "Organizing Unit": "Robotics and AI Lab",
+      "Trainers": "Dr. Susan Calvin",
+      "Content": "Analysis of the portrayal of robots and artificial intelligence in science fiction."
+    },
+    {
+      "id": "8",
+      "Organizing Unit": "Alien Studies Institute",
+      "Trainers": "Linguist Louise Banks",
+      "Content": "Examination of the communication and interaction with extraterrestrial life in science fiction."
+    },
+    {
+      "id": "9",
+      "Organizing Unit": "Virtual Reality Research Group",
+      "Trainers": "Hiro Protagonist",
+      "Content": "Study of virtual reality technology and its depiction in science fiction."
+    },
+    {
+      "id": "10",
+      "Organizing Unit": "Genetic Engineering Society",
+      "Trainers": "Dr. Moreau",
+      "Content": "Discussion on the ethical implications of genetic engineering in science fiction literature."
+    }
+  ]
