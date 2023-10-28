@@ -1,102 +1,26 @@
 [
-    {
-      "id": "1",
-      "role": "reader",
-      "name": "John Doe",
-      "image": "john-doe.jpg",
-      "username": "johndoe123",
-      "password": "********",
-      "phoneNumber": "1234567890",
-      "email": "johndoe@example.com"
-    },
-    {
-      "id": "2",
-      "role": "reader",
-      "name": "Jane Smith",
-      "image": "jane-smith.jpg",
-      "username": "janesmith456",
-      "password": "********",
-      "phoneNumber": "9876543210",
-      "email": "janesmith@example.com"
-    },
-    {
-      "id": "3",
-      "role": "reader",
-      "name": "David Johnson",
-      "image": "david-johnson.jpg",
-      "username": "davidjohnson789",
-      "password": "********",
-      "phoneNumber": "4567890123",
-      "email": "davidjohnson@example.com"
-    },
-    {
-      "id": "4",
-      "role": "reader",
-      "name": "Sarah Williams",
-      "image": "sarah-williams.jpg",
-      "username": "sarahwilliams321",
-      "password": "********",
-      "phoneNumber": "8901234567",
-      "email": "sarahwilliams@example.com"
-    },
-    {
-      "id": "5",
-      "role": "reader",
-      "name": "Michael Brown",
-      "image": "michael-brown.jpg",
-      "username": "michaelbrown654",
-      "password": "********",
-      "phoneNumber": "5678901234",
-      "email": "michaelbrown@example.com"
-    },
-    {
-      "id": "6",
-      "role": "reader",
-      "name": "Jennifer Davis",
-      "image": "jennifer-davis.jpg",
-      "username": "jenniferdavis987",
-      "password": "********",
-      "phoneNumber": "9012345678",
-      "email": "jenniferdavis@example.com"
-    },
-    {
-      "id": "7",
-      "role": "reader",
-      "name": "Christopher Wilson",
-      "image": "christopher-wilson.jpg",
-      "username": "christopherwilson123",
-      "password": "********",
-      "phoneNumber": "3456789012",
-      "email": "christopherwilson@example.com"
-    },
-    {
-      "id": "8",
-      "role": "reader",
-      "name": "Amanda Martinez",
-      "image": "amanda-martinez.jpg",
-      "username": "amandamartinez456",
-      "password": "********",
-      "phoneNumber": "6789012345",
-      "email": "amandamartinez@example.com"
-    },
-    {
-      "id": "9",
-      "role": "reader",
-      "name": "Matthew Taylor",
-      "image": "matthew-taylor.jpg",
-      "username": "matthewtaylor789",
-      "password": "********",
-      "phoneNumber": "2345678901",
-      "email": "matthewtaylor@example.com"
-    },
-    {
-      "id": "10",
-      "role": "reader",
-      "name": "Emily Anderson",
-      "image": "emily-anderson.jpg",
-      "username": "emilyanderson321",
-      "password": "********",
-      "phoneNumber": "7890123456",
-      "email": "emilyanderson@example.com"
-    }
-  ]
+  {
+    "ID": "1",
+    "Email": "harry@example.com",
+    "Fullname": "Harry Maguire",
+    "Passwords": "12345",
+    "department": "IT Department",
+    "role": "Developer"
+  },
+  {
+    "ID": "2",
+    "Email": "bruno@example.com",
+    "Fullname": "Bruno Fernandes",
+    "Passwords": "12345",
+    "department": "IT Department",
+    "role": "Developer"
+  },
+  {
+    "ID": "3",
+    "Email": "onana@example.com",
+    "Fullname": "Andre Onana",
+    "Passwords": "12345",
+    "department": "IT Department",
+    "role": "Developer"
+  }
+]

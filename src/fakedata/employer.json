@@ -1,0 +1,27 @@
+[
+    {
+        "id": "1",
+        "fullname": "Robin Van Persie",
+        "birth": "1985-03-15",
+        "sex": "Female",
+        "address": "123 Main Street, Cityville",
+        "phone": "555-123-4567"
+      },
+      {
+        "id": "2",
+        "fullname": "Wayne Rooney",
+        "birth": "1990-06-22",
+        "sex": "Male",
+        "address": "456 Elm Street, Townsville",
+        "phone": "555-987-6543"
+      },
+      {
+        "id": "3",
+        "fullname": "Lisandro Martinez",
+        "birth": "1988-11-10",
+        "sex": "Female",
+        "address": "789 Oak Street, Villageton",
+        "phone": "555-789-1234"
+      }
+
+]

@@ -1,0 +1,18 @@
+[
+    {
+        "id": "1",
+        "name": "example_file.txt",
+        "owner": "Bruno Fernandes",
+        "department": "IT Department",
+        "status": "Active",
+        "link": "https://example.com/files/12345"
+      },
+    {
+        "id": "2",
+        "name": "result_file.txt",
+        "owner": "Harry Maguire",
+        "department": "IT Department",
+        "status": "Active",
+        "link": "https://example.com/files/1"
+      }
+]
