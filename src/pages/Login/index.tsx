@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Form, Input, Button } from 'antd';
 
-const Register:React.FC = () => {
+const Login:React.FC = () => {
     const onFinish = (values: any) => {
         console.log('Received values:', values);
       };
@@ -53,4 +53,4 @@ const Register:React.FC = () => {
       );
     };
  
-export default Register;
+export default Login;

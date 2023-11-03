@@ -4,7 +4,6 @@ import { publicRoutes } from './Routes';
 import { DefaultLayout } from './components/layout';
 import { useDispatch, useSelector } from "react-redux";
 import { rootReducer } from './interface';
-import Login from './page/Login';
 
 
 
@@ -24,13 +23,7 @@ function App() {
             } else {
               Layout = DefaultLayout;
             }
-
-            if(login){
-
               return <Route key={index} path={route.path} element={<Layout><Page/></Layout>}></Route>
-            }else if(login == false){
-              return <Route key={index} path="/login" element={<Login></Login>}></Route>
-            }
           })}
         </Routes>
       </>

@@ -1,21 +1,17 @@
 //pages
-import EmpolyeesPage from 'src/page/Empolyees';
-
-import Home from '../page/Home';
-import MorePage from '../page/More';
-import Login from '../page/Login'
+import Home from '../pages/Home';
+import MorePage from '../pages/More';
+import Login from '../pages/Login'
+import EmpolyeesPage from '../pages/Empolyees';
 // Layout
 import { DefaultLayout } from '../components/layout';
 
 const publicRoutes = [
   { path: '/', component: Home },
   { path: '/more', component: MorePage, layout: DefaultLayout },
+  {path: './login', component:Login, layout: DefaultLayout},
   { path: '/employees', component: EmpolyeesPage, layout: DefaultLayout },
 ];
-    {path: '/', component: Home, },
-    {path: '/more', component:MorePage, layout: DefaultLayout},
-    {path: '/login', component:Login}
 
-]
 
 export { publicRoutes };
