@@ -1,5 +1,5 @@
 function EmpolyeesPage() {
-  return <></>;
+  return <>Trang nhân viên</>;
 }
 
 export default EmpolyeesPage;
