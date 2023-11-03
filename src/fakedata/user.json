@@ -1,0 +1,26 @@
+[
+  {
+    "ID": "1",
+    "Email": "harry@example.com",
+    "Fullname": "Harry Maguire",
+    "Passwords": "12345",
+    "department": "IT Department",
+    "role": "Developer"
+  },
+  {
+    "ID": "2",
+    "Email": "bruno@example.com",
+    "Fullname": "Bruno Fernandes",
+    "Passwords": "12345",
+    "department": "IT Department",
+    "role": "Developer"
+  },
+  {
+    "ID": "3",
+    "Email": "onana@example.com",
+    "Fullname": "Andre Onana",
+    "Passwords": "12345",
+    "department": "IT Department",
+    "role": "Developer"
+  }
+]
