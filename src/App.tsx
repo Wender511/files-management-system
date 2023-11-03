@@ -3,9 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes } from './Routes';
 import { DefaultLayout } from './components/layout';
 import { useDispatch, useSelector } from "react-redux";
-import { rootReducer } from './interface';
 import LoginPage from './pages/Login';
 
+interface rootReducer{
+  checkLogin:boolean
+}
 function App() {
   const login:any = useSelector((state: rootReducer) => state.checkLogin);
   const check = login.login
