@@ -10,12 +10,18 @@ function App() {
   const login:any = useSelector((state: rootReducer) => state.checkLogin);
   const check = login.login
   return (<>
-        {check == true ? <>
     <Router>
       <Routes>
           {publicRoutes.map((route, index) => {
             let Layout = DefaultLayout;
-            const Page = route.component;
+            let Page = LoginPage;
+            console.log(check);
+            
+            if(check){
+              Page = route.component
+            }
+            console.log(Page);
+            
             if (route.layout) {
               Layout = route.layout;
             } else {
@@ -25,9 +31,6 @@ function App() {
           })}
          </Routes>
       </Router>
-        </> : <>
-            <LoginPage/>
-        </>}
   </>
       );
 }

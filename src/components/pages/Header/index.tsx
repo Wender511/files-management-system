@@ -12,8 +12,8 @@ const Header = () => {
                
             </h1>
             <nav className="space-x-4">
-              <Link to="/home" className="text-white hover:underline">Home</Link>
-              <a href="#" className="text-white hover:underline">About</a>
+              <Link to="/" className="text-white hover:underline">Trang chủ</Link>
+              <Link to="/employees" className="text-white hover:underline">Trang nhân viên</Link>
               <a href="#" className="text-white hover:underline">Services</a>
               <a href="#" className="text-white hover:underline">Contact</a>
             </nav>
