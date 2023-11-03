@@ -1,16 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { publicRoutes } from './Routes';
 import { DefaultLayout } from './components/layout';
-import { useDispatch, useSelector } from "react-redux";
-import { rootReducer } from './interface';
-
-
-
-
+import { rootReducer } from './types';
 
 function App() {
-  const login = useSelector((state:rootReducer) => state.checkLogin);
+  const login = useSelector((state: rootReducer) => state.checkLogin);
   return (
     <Router>
       <>
@@ -23,7 +19,17 @@ function App() {
             } else {
               Layout = DefaultLayout;
             }
-              return <Route key={index} path={route.path} element={<Layout><Page/></Layout>}></Route>
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <Layout>
+                    <Page />
+                  </Layout>
+                }
+              ></Route>
+            );
           })}
         </Routes>
       </>
