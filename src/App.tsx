@@ -1,6 +1,5 @@
-import './App.css';
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import { publicRoutes } from './Routes';
 import { DefaultLayout } from './components/layout';
 import { useDispatch, useSelector } from "react-redux";
@@ -18,11 +17,11 @@ function App() {
       <>
         <Routes>
           {publicRoutes.map((route, index) => {
-            let Layout = DefaultLayout
-            const Page = route.component
-            if(route.layout){
+            let Layout = DefaultLayout;
+            const Page = route.component;
+            if (route.layout) {
               Layout = route.layout;
-            }else{
+            } else {
               Layout = DefaultLayout;
             }
 
