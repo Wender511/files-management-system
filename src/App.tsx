@@ -4,17 +4,15 @@ import { publicRoutes } from './Routes';
 import { DefaultLayout } from './components/layout';
 import { useDispatch, useSelector } from "react-redux";
 import { rootReducer } from './interface';
-
-
-
-
+import LoginPage from './pages/Login';
 
 function App() {
-  const login = useSelector((state:rootReducer) => state.checkLogin);
-  return (
+  const login:any = useSelector((state: rootReducer) => state.checkLogin);
+  const check = login.login
+  return (<>
+        {check == true ? <>
     <Router>
-      <>
-        <Routes>
+      <Routes>
           {publicRoutes.map((route, index) => {
             let Layout = DefaultLayout;
             const Page = route.component;
@@ -23,12 +21,15 @@ function App() {
             } else {
               Layout = DefaultLayout;
             }
-              return <Route key={index} path={route.path} element={<Layout><Page/></Layout>}></Route>
+            return <Route key={index} path={route.path} element={<Layout><Page /></Layout>}></Route>
           })}
-        </Routes>
-      </>
-    </Router>
-  );
+         </Routes>
+      </Router>
+        </> : <>
+            <LoginPage/>
+        </>}
+  </>
+      );
 }
 
-export default App;
+      export default App;
