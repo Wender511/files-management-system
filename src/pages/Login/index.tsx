@@ -1,56 +1,48 @@
-import { useState } from "react";
 import { Form, Input, Button } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { useDispatch } from 'react-redux';
+import login, { update } from 'src/Redux/login';
 
-const Login:React.FC = () => {
-    const onFinish = (values: any) => {
-        console.log('Received values:', values);
-      };
-    
-      return (
-        <div className="border border-red-500 border-dashed rounded-lg p-4">
-          <div style={{ maxWidth: '300px', margin: '0 auto' }}>
-            <h2>Đăng nhập</h2>
-            <Form
-              name="register"
-              onFinish={onFinish}
-              scrollToFirstError
-            >
-              <Form.Item
-                name="username"
-                label="Tên đăng nhập"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập tên đăng nhập!',
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-      
-              <Form.Item
-                name="password"
-                label="Mật khẩu"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Vui lòng nhập mật khẩu!',
-                  },
-                ]}
-                hasFeedback
-              >
-                <Input.Password />
-              </Form.Item>
-      
-              <Form.Item >
-                <Button type="primary" htmlType="submit">
-                  Đăng nhập
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
-        </div>
-      );
-    };
+const Login: React.FC = () => {
+  const dispatch = useDispatch()
+  const onFinish = () => {
+    const updateLogin = {
+      login: true
+    }
+    dispatch(update(updateLogin))
+  };
+  return ( 
+    <div className=''>
+      <div className='border border-gray-300 p-2 rounded-lg w-1/4 mx-auto mt-12 bg-[#ffffff] h-full'>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px'}}>
+        <Form
+          name="login"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          style={{ width: '300px' }}
+        >
+          <Form.Item
+            name="username"
+            rules={[{ required: true, message: 'Please input your username!'}]}
+          >
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" style={{ width: '100%' }} >
+              Log in
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
+      </div>
+    </div>
+);
+}
  
 export default Login;

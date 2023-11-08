@@ -1,40 +1,40 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { publicRoutes } from './Routes';
 import { DefaultLayout } from './components/layout';
-import { rootReducer } from './types';
+import { useDispatch, useSelector } from "react-redux";
+import LoginPage from './pages/Login';
 
+interface rootReducer{
+  checkLogin:boolean
+}
 function App() {
-  const login = useSelector((state: rootReducer) => state.checkLogin);
-  return (
+  const login:any = useSelector((state: rootReducer) => state.checkLogin);
+  const check = login.login
+  return (<>
     <Router>
-      <>
-        <Routes>
+      <Routes>
           {publicRoutes.map((route, index) => {
             let Layout = DefaultLayout;
-            const Page = route.component;
+            let Page = LoginPage;
+            console.log(check);
+            
+            if(check){
+              Page = route.component
+            }
+            console.log(Page);
+            
             if (route.layout) {
               Layout = route.layout;
             } else {
               Layout = DefaultLayout;
             }
-            return (
-              <Route
-                key={index}
-                path={route.path}
-                element={
-                  <Layout>
-                    <Page />
-                  </Layout>
-                }
-              ></Route>
-            );
+            return <Route key={index} path={route.path} element={<Layout><Page /></Layout>}></Route>
           })}
-        </Routes>
-      </>
-    </Router>
-  );
+         </Routes>
+      </Router>
+  </>
+      );
 }
 
-export default App;
+      export default App;
