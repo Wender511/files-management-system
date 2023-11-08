@@ -1,22 +1,31 @@
 import { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+
+import { loginSuccess } from 'src/Redux/authSlice';
 type FieldType = {
   email?: string;
   password?: string;
   remember?: string;
 };
 const Login: React.FC = () => {
+  const dispath = useDispatch();
   const hanldeSubmitForm = async (values: any) => {
-    console.log(values);
+    try {
+      const res = await axios.post(
+        'https://datt-git-main-spideyhihi271.vercel.app/api/auth/signin',
+        { ...values },
+      );
+      console.log(res);
+      dispath(loginSuccess(res.data));
+    } catch (error) {
+      console.log(error);
 
-    const test = await axios.post(
-      'https://datt-git-main-spideyhihi271.vercel.app/api/auth/signin',
-      { ...values },
-    );
-    console.log(test);
+      console.log('Có lỗi xảy ra');
+    }
   };
-  const hadleFailed = (values: any) => {};
+  const handleFailed = (values: any) => {};
   return (
     <Form
       name='basic'
@@ -25,7 +34,7 @@ const Login: React.FC = () => {
       style={{ maxWidth: 600 }}
       initialValues={{ remember: true }}
       onFinish={hanldeSubmitForm}
-      onFinishFailed={hadleFailed}
+      onFinishFailed={handleFailed}
       autoComplete='off'
     >
       <Form.Item<FieldType>

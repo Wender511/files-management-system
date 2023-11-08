@@ -11,6 +11,8 @@ interface rootReducer {
 }
 function App() {
   const loginInfo: any = useSelector((state: rootReducer) => state.auth);
+  console.log(loginInfo);
+
   return (
     <>
       <Router>
