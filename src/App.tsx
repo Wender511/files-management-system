@@ -1,23 +1,31 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Fragment } from 'react';
 
-import { publicRoutes } from './Routes';
+import { authRoutes } from './Routes';
 import { DefaultLayout } from './components/layout';
-import { rootReducer } from './types';
+import LoginPage from './pages/Login';
 
+interface rootReducer {
+  auth: boolean;
+}
 function App() {
-  const login = useSelector((state: rootReducer) => state.checkLogin);
+  const loginInfo: any = useSelector((state: rootReducer) => state.auth);
   return (
-    <Router>
-      <>
+    <>
+      <Router>
         <Routes>
-          {publicRoutes.map((route, index) => {
-            let Layout = DefaultLayout;
-            const Page = route.component;
+          {authRoutes.map((route, index) => {
+            let Layout;
+            let Page = LoginPage;
+            if (loginInfo.user) {
+              Page = route.component;
+            }
+
             if (route.layout) {
               Layout = route.layout;
             } else {
-              Layout = DefaultLayout;
+              Layout = Fragment;
             }
             return (
               <Route
@@ -32,8 +40,8 @@ function App() {
             );
           })}
         </Routes>
-      </>
-    </Router>
+      </Router>
+    </>
   );
 }
 

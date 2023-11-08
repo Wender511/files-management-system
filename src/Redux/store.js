@@ -1,11 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import useReducer from './login';
-
+import authReducer from "./authSlice";
 const store = configureStore({
   reducer: {
-    checkLogin: useReducer,
-  }
+    auth: authReducer,
+  },
 });
 
 export default store;

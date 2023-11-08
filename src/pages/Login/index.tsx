@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
+import axios from 'axios';
 type FieldType = {
-  username?: string;
+  email?: string;
   password?: string;
   remember?: string;
 };
 const Login: React.FC = () => {
-  const hanldeSubmitForm = (values: any) => {
-    console.log('Received values:', values);
+  const hanldeSubmitForm = async (values: any) => {
+    console.log(values);
+
+    const test = await axios.post(
+      'https://datt-git-main-spideyhihi271.vercel.app/api/auth/signin',
+      { ...values },
+    );
+    console.log(test);
   };
   const hadleFailed = (values: any) => {};
   return (
@@ -22,9 +29,12 @@ const Login: React.FC = () => {
       autoComplete='off'
     >
       <Form.Item<FieldType>
-        label='Username'
-        name='username'
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        label='email'
+        name='email'
+        rules={[
+          { required: true, message: 'Please input your username!' },
+          { type: 'email', message: 'Must be email' },
+        ]}
       >
         <Input />
       </Form.Item>
@@ -35,14 +45,6 @@ const Login: React.FC = () => {
         rules={[{ required: true, message: 'Please input your password!' }]}
       >
         <Input.Password />
-      </Form.Item>
-
-      <Form.Item<FieldType>
-        name='remember'
-        valuePropName='checked'
-        wrapperCol={{ offset: 8, span: 16 }}
-      >
-        <Checkbox>Remember me</Checkbox>
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
