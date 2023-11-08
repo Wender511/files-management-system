@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -19,9 +18,9 @@ const Login: React.FC = () => {
       );
       console.log(res);
       dispath(loginSuccess(res.data));
+      localStorage.setItem('access_token', res.data.data.token);
     } catch (error) {
-      console.log(error);
-
+      console.error(error);
       console.log('Có lỗi xảy ra');
     }
   };

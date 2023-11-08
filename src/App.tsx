@@ -11,8 +11,6 @@ interface rootReducer {
 }
 function App() {
   const loginInfo: any = useSelector((state: rootReducer) => state.auth);
-  console.log(loginInfo);
-
   return (
     <>
       <Router>
@@ -20,7 +18,7 @@ function App() {
           {authRoutes.map((route, index) => {
             let Layout;
             let Page = LoginPage;
-            if (loginInfo.user) {
+            if (!loginInfo.user) {
               Page = route.component;
             }
 
