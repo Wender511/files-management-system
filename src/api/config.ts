@@ -3,9 +3,6 @@ import qs from 'qs';
 
 import authApi from './authApi';
 
-const beesmartAPI = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-});
 export const getToken = () =>
   localStorage.getItem('access_token')
     ? localStorage.getItem('access_token')

@@ -7,9 +7,9 @@ type Props = {
   idCh: string;
 };
 
-const productApi = {
+const employeeApi = {
   getProducts: () => {
-    return request(`/api-san-pham`, {
+    return request(`/api/v1/employee`, {
       method: 'GET',
     });
   },
