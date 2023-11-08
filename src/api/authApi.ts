@@ -9,11 +9,6 @@ const authApi = {
       data,
     });
   },
-  checkToken: () => {
-    return request('/auth/check-token', {
-      method: 'GET',
-    });
-  },
   refresh: async () => {
     return await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/authentication/api/v1/refreshtoken`,

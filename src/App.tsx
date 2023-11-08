@@ -1,40 +1,48 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Fragment } from 'react';
 
-import { publicRoutes } from './Routes';
+import { authRoutes } from './Routes';
 import { DefaultLayout } from './components/layout';
-import { useDispatch, useSelector } from "react-redux";
 import LoginPage from './pages/Login';
 
-interface rootReducer{
-  checkLogin:boolean
+interface rootReducer {
+  auth: boolean;
 }
 function App() {
-  const login:any = useSelector((state: rootReducer) => state.checkLogin);
-  const check = login.login
-  return (<>
-    <Router>
-      <Routes>
-          {publicRoutes.map((route, index) => {
-            let Layout = DefaultLayout;
+  const loginInfo: any = useSelector((state: rootReducer) => state.auth);
+  return (
+    <>
+      <Router>
+        <Routes>
+          {authRoutes.map((route, index) => {
+            let Layout;
             let Page = LoginPage;
-            console.log(check);
-            
-            if(check){
-              Page = route.component
+            if (loginInfo.user) {
+              Page = route.component;
             }
-            console.log(Page);
-            
+
             if (route.layout) {
               Layout = route.layout;
             } else {
-              Layout = DefaultLayout;
+              Layout = Fragment;
             }
-            return <Route key={index} path={route.path} element={<Layout><Page /></Layout>}></Route>
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={
+                  <Layout>
+                    <Page />
+                  </Layout>
+                }
+              ></Route>
+            );
           })}
-         </Routes>
+        </Routes>
       </Router>
-  </>
-      );
+    </>
+  );
 }
 
-      export default App;
+export default App;

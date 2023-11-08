@@ -1,17 +1,16 @@
 //pages
 import Home from '../pages/Home';
 import MorePage from '../pages/More';
-import LoginPage from '../pages/Login'
-
+import LoginPage from '../pages/Login';
 import EmpolyeesPage from '../pages/Empolyees';
 // Layout
 import { DefaultLayout } from '../components/layout';
 
-const publicRoutes = [
+const authRoutes = [
   { path: '/', component: Home },
   { path: '/more', component: MorePage, layout: DefaultLayout },
-  {path: '/login', component:LoginPage, layout: DefaultLayout},
+  { path: '/login', component: LoginPage },
   { path: '/employees', component: EmpolyeesPage, layout: DefaultLayout },
 ];
 
-export { publicRoutes };
+export { authRoutes };
