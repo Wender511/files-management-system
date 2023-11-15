@@ -14,9 +14,17 @@ const employeeApi = {
       data: values,
     });
   },
-  patchEmployee:(values:any) => {
-    
-  }
+  patchEmployee: (_id: string, values: any) => {
+    return request(`/api/v1/employee/${_id}`, {
+      method: 'PATCH',
+      data: values,
+    });
+  },
+  deleteEmployee: (_id: string) => {
+    return request(`/api/v1/employee/${_id}`, {
+      method: 'DELETE',
+    });
+  },
 };
 
 const useEmployees = () => {

@@ -119,7 +119,11 @@ function EmployeesList({ data, mutate }: Props) {
         await mutate('/api/v1/employee');
       }
       if (modalType === 'edit') {
-        return;
+        const { _id, ...rest } = values;
+        await employeeApi.patchEmployee(values._id, rest);
+        enqueueSnackbar('Sửa sản phẩm thành công', { variant: 'success' });
+        setIsModalOpen(false);
+        await mutate('/api/v1/employee');
       }
     } catch (error) {
       console.log('error:', error);
@@ -135,10 +139,10 @@ function EmployeesList({ data, mutate }: Props) {
     setEditingEmployee(record);
     setIsModalOpen(true);
   };
-  const handleDeleteProduct = async (id: string) => {
-    // await DeleteAPI(`/api/san-pham/${id}`);
-    // mutate('/api/san-pham?idCh=4');
-    // enqueueSnackbar('Xóa sản phẩm thành công', { variant: 'success' });
+  const handleDeleteProduct = async (_id: string) => {
+    await employeeApi.deleteEmployee(_id);
+    mutate('/api/san-pham?idCh=4');
+    enqueueSnackbar('Xóa sản phẩm thành công', { variant: 'success' });
   };
   return (
     <Space className='w-full' direction='vertical'>
