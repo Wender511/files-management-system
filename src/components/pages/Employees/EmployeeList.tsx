@@ -5,7 +5,7 @@ import { useState } from 'react';
 import * as xlsx from 'xlsx';
 import { UploadProps } from 'antd/lib';
 import { enqueueSnackbar } from 'notistack';
-import { KeyedMutator, mutate } from 'swr';
+import { KeyedMutator } from 'swr';
 
 import BasicTable from 'src/components/BasicTable/BasicTable';
 import { EmployeesProp } from 'src/types';
@@ -51,23 +51,6 @@ function EmployeesList({ data, mutate }: Props) {
   const handleTableChange = (pagination: any) => {
     console.log('product list call');
   };
-  const handleUpload = (json: any) => {
-    setUploading(true);
-    fetch('https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188', {
-      method: 'POST',
-      body: JSON.stringify(json),
-    })
-      .then(res => res.json())
-      .then(() => {
-        message.success('upload successfully.');
-      })
-      .catch(() => {
-        message.error('upload failed.');
-      })
-      .finally(() => {
-        setUploading(false);
-      });
-  };
   const handleAddEmployee = () => {
     setModalType('add');
     setIsModalOpen(true);
@@ -77,19 +60,10 @@ function EmployeesList({ data, mutate }: Props) {
     accept: '.xlsx, .xls',
     showUploadList: false,
     multiple: false,
-
+    maxCount: 1,
     onChange(info) {
       if (info.file.status !== 'uploading') {
-        const reader = new FileReader();
-        reader.onload = e => {
-          const data = e.target?.result;
-          const workbook = xlsx.read(data, { type: 'array' });
-          const sheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[sheetName];
-          const json = xlsx.utils.sheet_to_json(worksheet);
-          handleUpload(json);
-        };
-        reader.readAsArrayBuffer(info.fileList[0].originFileObj as Blob);
+        console.log(info);
       }
     },
     beforeUpload(file: any) {
@@ -152,14 +126,13 @@ function EmployeesList({ data, mutate }: Props) {
         extra={
           <>
             <Button type='default'>Export</Button>
-            <Button>Import</Button>
             <Upload {...uploadProps}>
               <Button icon={<UploadOutlined />} loading={uploading}>
                 Import
               </Button>
             </Upload>
             <Button type='primary' onClick={handleAddEmployee}>
-              Thêm hàng
+              Thêm nhân viên
             </Button>
           </>
         }
