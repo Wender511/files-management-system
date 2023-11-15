@@ -1,4 +1,5 @@
-import { Button, Space, Tooltip } from 'antd';
+import { Button, Popconfirm, Space, Tooltip, message } from 'antd';
+import { useState } from 'react';
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from 'react-icons/ai';
 
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
 };
 const TableAction = (props: Props) => {
   const { onEdit, onView, onDelete } = props;
+  const [open, setOpen] = useState(false);
   return (
     <Space align='center' direction='horizontal' size={'small'}>
       {onEdit && (
@@ -15,7 +17,6 @@ const TableAction = (props: Props) => {
           <Button
             type='text'
             className='text-blue-600 hover:!text-blue-500'
-            ghost
             icon={<AiOutlineEdit className='text-xl' />}
             onClick={onEdit}
           />
@@ -26,7 +27,6 @@ const TableAction = (props: Props) => {
           <Button
             type='text'
             className='text-blue-600 hover:!text-blue-500'
-            ghost
             icon={<AiOutlineEye className='text-xl' />}
             onClick={onView}
           />
@@ -34,13 +34,26 @@ const TableAction = (props: Props) => {
       )}
       {onDelete && (
         <Tooltip title='Xóa'>
-          <Button
-            type='text'
-            ghost
-            danger
-            icon={<AiOutlineDelete className='text-xl' />}
-            onClick={onDelete}
-          />
+          <Popconfirm
+            title='Delete the task'
+            description='Are you sure to delete this task?'
+            onConfirm={() => {
+              onDelete();
+              setOpen(false);
+            }}
+            onCancel={() => {
+              message.error('Click on No');
+              setOpen(false);
+            }}
+            okText='Yes'
+            cancelText='No'
+          >
+            <Button
+              type='text'
+              danger
+              icon={<AiOutlineDelete className='text-xl' />}
+            />
+          </Popconfirm>
         </Tooltip>
       )}
     </Space>
