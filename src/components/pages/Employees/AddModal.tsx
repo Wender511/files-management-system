@@ -12,7 +12,6 @@ import {
   Upload,
   message,
 } from 'antd';
-import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 
 import { EmployeesProp } from 'src/types';
@@ -27,14 +26,7 @@ type Props = {
 const AddModal = (props: Props) => {
   const { isOpen, onCancel, onSuccess, modalType, editingProduct } = props;
   const [form] = Form.useForm();
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const selectGender = (
-    <Select defaultValue='other'>
-      <Select.Option value='male'>male</Select.Option>
-      <Select.Option value='female'>female</Select.Option>
-      <Select.Option value='other'>other</Select.Option>
-    </Select>
-  );
+
   const handleSubmitForm = async () => {
     try {
       const values = await form.validateFields();
@@ -64,18 +56,18 @@ const AddModal = (props: Props) => {
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               {modalType === 'edit' ? (
-                <Form.Item label='Id sản phẩm' name={'_id'}>
-                  <Input placeholder='Id sản phẩm' disabled />
+                <Form.Item label='Id nhân viên' name={'_id'}>
+                  <Input placeholder='Id nhân viên' disabled />
                 </Form.Item>
               ) : null}
               <Form.Item
-                label='Tên sản phẩm'
+                label='Tên nhân viên'
                 rules={[
-                  { required: true, message: 'Vui lòng nhập tên sản phẩm' },
+                  { required: true, message: 'Vui lòng nhập tên nhân viên' },
                 ]}
                 name={'name'}
               >
-                <Input placeholder='Tên sản phẩm' tabIndex={1} />
+                <Input placeholder='Tên nhân viên' tabIndex={1} />
               </Form.Item>
               <Form.Item
                 label='Năm sinh'
@@ -94,7 +86,6 @@ const AddModal = (props: Props) => {
                 <Select>
                   <Select.Option value='male'>male</Select.Option>
                   <Select.Option value='female'>female</Select.Option>
-                  <Select.Option value='other'>other</Select.Option>
                 </Select>
               </Form.Item>
 
@@ -110,6 +101,7 @@ const AddModal = (props: Props) => {
                 name={'phone'}
                 rules={[
                   { required: true, message: 'Vui lòng nhập số điện thoại' },
+                  { len: 10, message: 'Số điện thoại 10 chữ số' },
                 ]}
               >
                 <Input placeholder='Số điện thoại' tabIndex={5} />

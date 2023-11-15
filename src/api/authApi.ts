@@ -20,8 +20,8 @@ const authApi = {
     );
   },
   logout: () => {
-    return request('/auth/logout', {
-      method: 'GET',
+    return request('/api/auth/logout', {
+      method: 'POST',
     });
   },
 };

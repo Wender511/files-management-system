@@ -4,30 +4,35 @@ import { ColumnsType } from 'antd/es/table';
 import { useState } from 'react';
 import * as xlsx from 'xlsx';
 import { UploadProps } from 'antd/lib';
+import { enqueueSnackbar } from 'notistack';
+import { KeyedMutator, mutate } from 'swr';
 
 import BasicTable from 'src/components/BasicTable/BasicTable';
 import { EmployeesProp } from 'src/types';
 import TableAction from 'src/components/TableAction/tableAction';
+import { employeeApi } from 'src/api/empolyeeApi';
 
 import AddModal from './AddModal';
 
 type Props = {
   data: EmployeesProp[];
+  mutate: KeyedMutator<any>;
 };
-function EmployeesList({ data }: Props) {
+function EmployeesList({ data, mutate }: Props) {
   const [employees, setEmployees] = useState<EmployeesProp[]>(data);
   const [uploading, setUploading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState<'add' | 'edit' | null>(null);
-  const [editingProduct, setEditingProduct] = useState<EmployeesProp | null>(
+  const [editingEmployee, setEditingEmployee] = useState<EmployeesProp | null>(
     null,
   );
   const columns: ColumnsType<EmployeesProp> = [
     { key: 1, title: 'ID', width: 50, dataIndex: '_id' },
     { key: 2, title: 'Tên', width: 50, dataIndex: 'name' },
-    { key: 3, title: 'Năm sinh', width: 100, dataIndex: 'birth' },
-    { key: 4, title: 'Địa chỉ', width: 100, dataIndex: 'address' },
-    { key: 5, title: 'Số điện thoại', width: 100, dataIndex: 'string' },
+    { key: 3, title: 'Giới tính ', width: 50, dataIndex: 'gender' },
+    { key: 4, title: 'Năm sinh', width: 100, dataIndex: 'birth' },
+    { key: 5, title: 'Địa chỉ', width: 100, dataIndex: 'address' },
+    { key: 6, title: 'Số điện thoại', width: 100, dataIndex: 'phone' },
     {
       title: 'Action',
       key: 'action',
@@ -62,6 +67,10 @@ function EmployeesList({ data }: Props) {
       .finally(() => {
         setUploading(false);
       });
+  };
+  const handleAddEmployee = () => {
+    setModalType('add');
+    setIsModalOpen(true);
   };
   const uploadProps: UploadProps = {
     name: 'excel-file',
@@ -102,42 +111,28 @@ function EmployeesList({ data }: Props) {
     },
   };
   const handleModalOk = async (values: EmployeesProp) => {
-    // try {
-    //   if (modalType === 'add') {
-    //     const newData = new FormData();
-    //     for (const [key, value] of Object.entries(values)) {
-    //       if (value !== undefined && value !== null) {
-    //         newData.append(key, value);
-    //       }
-    //     }
-    //     console.log(await postAPI('/api/san-pham?idCh=4', newData));
-    //     mutate('/api/san-pham?idCh=4');
-    //     enqueueSnackbar('Thêm sản phẩm thành công', { variant: 'success' });
-    //     setIsModalOpen(false);
-    //   }
-    //   if (modalType === 'edit') {
-    //     await postAPI(`/api/san-pham/${values.id}?idCh=4`, {
-    //       ...values,
-    //       idCh: '4',
-    //       anHien: 1,
-    //     });
-    //     enqueueSnackbar('Sửa sản phẩm thành công', { variant: 'success' });
-    //     mutate('/api/san-pham?idCh=4');
-    //     setIsModalOpen(false);
-    //     return;
-    //   }
-    // } catch (error) {
-    //   console.log('error:', error);
-    //   enqueueSnackbar('Có lỗi xảy ra', { variant: 'error' });
-    // }
-    // setIsModalOpen(false);
+    try {
+      if (modalType === 'add') {
+        await employeeApi.postEmployee(values);
+        enqueueSnackbar('Thêm sản phẩm thành công', { variant: 'success' });
+        setIsModalOpen(false);
+        await mutate('/api/v1/employee');
+      }
+      if (modalType === 'edit') {
+        return;
+      }
+    } catch (error) {
+      console.log('error:', error);
+      enqueueSnackbar('Có lỗi xảy ra', { variant: 'error' });
+    }
+    setIsModalOpen(false);
   };
   const handleModalCancel = () => {
     setIsModalOpen(false);
   };
   const handleEditProduct = (record: EmployeesProp) => {
     setModalType('edit');
-    setEditingProduct(record);
+    setEditingEmployee(record);
     setIsModalOpen(true);
   };
   const handleDeleteProduct = async (id: string) => {
@@ -149,7 +144,7 @@ function EmployeesList({ data }: Props) {
     <Space className='w-full' direction='vertical'>
       <BasicTable
         columns={columns}
-        data={data}
+        data={employees}
         extra={
           <>
             <Button type='default'>Export</Button>
@@ -159,7 +154,7 @@ function EmployeesList({ data }: Props) {
                 Import
               </Button>
             </Upload>
-            <Button type='primary' onClick={() => {}}>
+            <Button type='primary' onClick={handleAddEmployee}>
               Thêm hàng
             </Button>
           </>
@@ -170,7 +165,7 @@ function EmployeesList({ data }: Props) {
         isOpen={isModalOpen}
         onSuccess={handleModalOk}
         onCancel={handleModalCancel}
-        editingProduct={editingProduct}
+        editingProduct={editingEmployee}
         modalType={modalType}
       />
     </Space>
