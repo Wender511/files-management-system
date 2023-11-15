@@ -40,6 +40,7 @@ const Login: React.FC = () => {
         localStorage.setItem('access_token', res.data.data.token);
         message.success('Đăng nhập thành công');
         dispath(loginSuccess(res.data));
+        navigate('/')
       }
     } catch (error) {
       console.log('error:', error);

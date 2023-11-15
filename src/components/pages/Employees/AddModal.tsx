@@ -12,7 +12,6 @@ import {
   Upload,
   message,
 } from 'antd';
-import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 
 import { EmployeesProp } from 'src/types';
@@ -64,18 +63,18 @@ const AddModal = (props: Props) => {
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               {modalType === 'edit' ? (
-                <Form.Item label='Id sản phẩm' name={'_id'}>
-                  <Input placeholder='Id sản phẩm' disabled />
+                <Form.Item label='Id nhân viên' name={'_id'}>
+                  <Input placeholder='Id nhân viên' disabled />
                 </Form.Item>
               ) : null}
               <Form.Item
-                label='Tên sản phẩm'
+                label='Tên nhân viên'
                 rules={[
-                  { required: true, message: 'Vui lòng nhập tên sản phẩm' },
+                  { required: true, message: 'Vui lòng nhập tên nhân viên' },
                 ]}
                 name={'name'}
               >
-                <Input placeholder='Tên sản phẩm' tabIndex={1} />
+                <Input placeholder='Tên nhân viên' tabIndex={1} />
               </Form.Item>
               <Form.Item
                 label='Năm sinh'
