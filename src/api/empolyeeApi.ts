@@ -8,6 +8,15 @@ const employeeApi = {
       method: 'GET',
     });
   },
+  postEmployee: (values: any) => {
+    return request(`/api/v1/employee`, {
+      method: 'POST',
+      data: values,
+    });
+  },
+  patchEmployee:(values:any) => {
+    
+  }
 };
 
 const useEmployees = () => {

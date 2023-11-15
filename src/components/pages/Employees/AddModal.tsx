@@ -26,14 +26,7 @@ type Props = {
 const AddModal = (props: Props) => {
   const { isOpen, onCancel, onSuccess, modalType, editingProduct } = props;
   const [form] = Form.useForm();
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
-  const selectGender = (
-    <Select defaultValue='other'>
-      <Select.Option value='male'>male</Select.Option>
-      <Select.Option value='female'>female</Select.Option>
-      <Select.Option value='other'>other</Select.Option>
-    </Select>
-  );
+
   const handleSubmitForm = async () => {
     try {
       const values = await form.validateFields();
@@ -93,7 +86,6 @@ const AddModal = (props: Props) => {
                 <Select>
                   <Select.Option value='male'>male</Select.Option>
                   <Select.Option value='female'>female</Select.Option>
-                  <Select.Option value='other'>other</Select.Option>
                 </Select>
               </Form.Item>
 
@@ -109,6 +101,7 @@ const AddModal = (props: Props) => {
                 name={'phone'}
                 rules={[
                   { required: true, message: 'Vui lòng nhập số điện thoại' },
+                  { len: 10, message: 'Số điện thoại 10 chữ số' },
                 ]}
               >
                 <Input placeholder='Số điện thoại' tabIndex={5} />

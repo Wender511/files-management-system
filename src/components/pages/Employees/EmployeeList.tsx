@@ -5,17 +5,20 @@ import { useState } from 'react';
 import * as xlsx from 'xlsx';
 import { UploadProps } from 'antd/lib';
 import { enqueueSnackbar } from 'notistack';
+import { KeyedMutator, mutate } from 'swr';
 
 import BasicTable from 'src/components/BasicTable/BasicTable';
 import { EmployeesProp } from 'src/types';
 import TableAction from 'src/components/TableAction/tableAction';
+import { employeeApi } from 'src/api/empolyeeApi';
 
 import AddModal from './AddModal';
 
 type Props = {
   data: EmployeesProp[];
+  mutate: KeyedMutator<any>;
 };
-function EmployeesList({ data }: Props) {
+function EmployeesList({ data, mutate }: Props) {
   const [employees, setEmployees] = useState<EmployeesProp[]>(data);
   const [uploading, setUploading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -110,10 +113,10 @@ function EmployeesList({ data }: Props) {
   const handleModalOk = async (values: EmployeesProp) => {
     try {
       if (modalType === 'add') {
-        console.log(values);
-        
+        await employeeApi.postEmployee(values);
         enqueueSnackbar('Thêm sản phẩm thành công', { variant: 'success' });
         setIsModalOpen(false);
+        await mutate('/api/v1/employee');
       }
       if (modalType === 'edit') {
         return;
