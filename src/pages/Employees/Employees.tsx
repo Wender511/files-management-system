@@ -5,7 +5,7 @@ import EmployeesList from 'src/components/pages/Employees/EmployeeList';
 function EmpolyeesPage() {
   const { data: employeesData, mutate, error } = useEmployees();
   if (employeesData && employeesData?.data)
-    return <EmployeesList data={employeesData.data}></EmployeesList>;
+    return <EmployeesList data={employeesData.data} mutate={mutate}></EmployeesList>;
   return (
     <>
       <Spin></Spin>
