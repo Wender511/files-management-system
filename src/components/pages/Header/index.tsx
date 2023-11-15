@@ -1,7 +1,8 @@
 import { LogoutOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Avatar, Button, Dropdown, Space, Typography } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import authApi from 'src/api/authApi';
 import {logout} from '../../../Redux/authSlice';
@@ -14,38 +15,26 @@ type NavbarLinkType = {
   linkTo: string;
   subMenu?: MenuProps['items'];
 };
+interface rootReducer {
+  auth: boolean;
+}
 
 const NavbarLinks: NavbarLinkType[] = [
-  {
-    title: 'Trang chủ', linkTo: '/',
-  },
-  // {
-    //   title: 'Bán hàng',
-  //   linkTo: '/ban-hang',
-  //   subMenu: [
-    //     {
-      //       key: '1',
-      //       label: <Link to={'/ban-hang'}>Bán hàng</Link>,
-      //     },
-  //     {
-  //       key: '2',
-  //       label: <Link to={'/lich-su-ban-hang'}>Lịch sử bán hàng</Link>,
-  //     },
-  //     {
-  //       key: '3',
-  //       label: <Link to={'/danh-sach-khach-hang'}>Danh sách khách hàng</Link>,
-  //     },
-  //   ],
-  // },
+  { title: 'Trang chủ', linkTo: '/'},
   { title: 'Nhân viên', linkTo: '/employees' },
   { title: 'Tập huấn', linkTo: '/training' },
   { title: 'Thết bị', linkTo: '/device' },
-  { title: 'Bẩy', linkTo: '/trap' },
-  
+  { title: 'Bẫy', linkTo: '/trap' },
 ];
 function Header() {
   const dispath = useDispatch()
   const navigate = useNavigate();
+  const checkrole: any = useSelector((state: rootReducer) => state.auth);
+useEffect(()=>{
+  if(checkrole.userData.data.role == 'manager'){
+    NavbarLinks.push({title: 'Cấp tài khoản', linkTo: '/trap'})
+  }
+},[])
   const logoutAcount = () => {
     authApi.logout()
     dispath(logout())
