@@ -4,7 +4,7 @@ import { request } from './config';
 
 const authApi = {
   login: (data: any) => {
-    return request(`/authentication/api/v1/login`, {
+    return request(`/api/auth/signin`, {
       method: 'POST',
       data,
     });

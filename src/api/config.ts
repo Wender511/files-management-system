@@ -3,25 +3,6 @@ import qs from 'qs';
 
 import authApi from './authApi';
 
-const beesmartAPI = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-});
-export const getAPI = (url: string) =>
-  beesmartAPI.get(url).then(res => res.data);
-
-export const postAPI = async <T>(key: string, newData: T) => {
-  const response = await beesmartAPI.post(key, { ...newData });
-  return response?.data;
-};
-export const patchAPI = async <T>(key: string, id: string, newData: T) => {
-  const response = await beesmartAPI.patch(`${key}/${id}`, { ...newData });
-  return response?.data;
-};
-export const DeleteAPI = async (key: string, id: string) => {
-  const response = await beesmartAPI.delete(`${key}/${id}`);
-  return response?.data;
-};
-
 export const getToken = () =>
   localStorage.getItem('access_token')
     ? localStorage.getItem('access_token')

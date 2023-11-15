@@ -7,6 +7,9 @@ import { UploadProps } from 'antd/lib';
 
 import BasicTable from 'src/components/BasicTable/BasicTable';
 import { EmployeesProp } from 'src/types';
+import TableAction from 'src/components/TableAction/tableAction';
+
+import AddModal from './AddModal';
 
 type Props = {
   data: EmployeesProp[];
@@ -14,12 +17,31 @@ type Props = {
 function EmployeesList({ data }: Props) {
   const [employees, setEmployees] = useState<EmployeesProp[]>(data);
   const [uploading, setUploading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState<'add' | 'edit' | null>(null);
+  const [editingProduct, setEditingProduct] = useState<EmployeesProp | null>(
+    null,
+  );
   const columns: ColumnsType<EmployeesProp> = [
-    { key: 1, title: 'ID', width: 50, dataIndex: 'id' },
-    { key: 2, title: 'Tên', width: 100, dataIndex: 'name' },
+    { key: 1, title: 'ID', width: 50, dataIndex: '_id' },
+    { key: 2, title: 'Tên', width: 50, dataIndex: 'name' },
     { key: 3, title: 'Năm sinh', width: 100, dataIndex: 'birth' },
     { key: 4, title: 'Địa chỉ', width: 100, dataIndex: 'address' },
     { key: 5, title: 'Số điện thoại', width: 100, dataIndex: 'string' },
+    {
+      title: 'Action',
+      key: 'action',
+      width: 80,
+      render: (record: EmployeesProp) => {
+        return (
+          <TableAction
+            onDelete={() => handleDeleteProduct(record._id!)}
+            onEdit={() => handleEditProduct(record)}
+          />
+        );
+      },
+      align: 'center',
+    },
   ];
   const handleTableChange = (pagination: any) => {
     console.log('product list call');
@@ -79,6 +101,50 @@ function EmployeesList({ data }: Props) {
       return false;
     },
   };
+  const handleModalOk = async (values: EmployeesProp) => {
+    // try {
+    //   if (modalType === 'add') {
+    //     const newData = new FormData();
+    //     for (const [key, value] of Object.entries(values)) {
+    //       if (value !== undefined && value !== null) {
+    //         newData.append(key, value);
+    //       }
+    //     }
+    //     console.log(await postAPI('/api/san-pham?idCh=4', newData));
+    //     mutate('/api/san-pham?idCh=4');
+    //     enqueueSnackbar('Thêm sản phẩm thành công', { variant: 'success' });
+    //     setIsModalOpen(false);
+    //   }
+    //   if (modalType === 'edit') {
+    //     await postAPI(`/api/san-pham/${values.id}?idCh=4`, {
+    //       ...values,
+    //       idCh: '4',
+    //       anHien: 1,
+    //     });
+    //     enqueueSnackbar('Sửa sản phẩm thành công', { variant: 'success' });
+    //     mutate('/api/san-pham?idCh=4');
+    //     setIsModalOpen(false);
+    //     return;
+    //   }
+    // } catch (error) {
+    //   console.log('error:', error);
+    //   enqueueSnackbar('Có lỗi xảy ra', { variant: 'error' });
+    // }
+    // setIsModalOpen(false);
+  };
+  const handleModalCancel = () => {
+    setIsModalOpen(false);
+  };
+  const handleEditProduct = (record: EmployeesProp) => {
+    setModalType('edit');
+    setEditingProduct(record);
+    setIsModalOpen(true);
+  };
+  const handleDeleteProduct = async (id: string) => {
+    // await DeleteAPI(`/api/san-pham/${id}`);
+    // mutate('/api/san-pham?idCh=4');
+    // enqueueSnackbar('Xóa sản phẩm thành công', { variant: 'success' });
+  };
   return (
     <Space className='w-full' direction='vertical'>
       <BasicTable
@@ -99,6 +165,13 @@ function EmployeesList({ data }: Props) {
           </>
         }
         onChange={handleTableChange}
+      />
+      <AddModal
+        isOpen={isModalOpen}
+        onSuccess={handleModalOk}
+        onCancel={handleModalCancel}
+        editingProduct={editingProduct}
+        modalType={modalType}
       />
     </Space>
   );
