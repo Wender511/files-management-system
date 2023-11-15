@@ -1,28 +1,17 @@
 import useSWR from 'swr';
 
-
 import { request } from './config';
 
-type Props = {
-  idCh: string;
-};
-
 const employeeApi = {
-  getProducts: () => {
+  getEmployees: () => {
     return request(`/api/v1/employee`, {
       method: 'GET',
     });
   },
 };
 
-const useProducts = (params: Props) => {
-  const {
-    data = [],
-    error,
-    isLoading,
-    mutate,
-  } = useSWR(`/api/san-pham`);
-
+const useEmployees = () => {
+  const { data, error, isLoading, mutate } = useSWR<any>(`/api/v1/employee`);
   return {
     data,
     error,
@@ -30,5 +19,5 @@ const useProducts = (params: Props) => {
     mutate,
   };
 };
-
-export default useProducts;
+export { employeeApi };
+export default useEmployees;

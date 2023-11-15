@@ -2,6 +2,7 @@ export interface rootReducer {
   checkLogin: boolean;
 }
 export interface EmployeesProp {
+  _id: string;
   name: string;
   birth: number;
   gender: string;

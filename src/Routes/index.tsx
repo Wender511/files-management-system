@@ -2,7 +2,7 @@
 import Home from '../pages/Home';
 import MorePage from '../pages/More';
 import LoginPage from '../pages/Login';
-import EmpolyeesPage from '../pages/Empolyees';
+import EmpolyeesPage from '../pages/Employees/Employees';
 // Layout
 import { DefaultLayout, LoginLayout } from '../components/layout';
 
