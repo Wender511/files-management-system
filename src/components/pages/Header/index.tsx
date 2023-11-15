@@ -1,10 +1,14 @@
-import { LockOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import { LogoutOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Avatar, Button, Dropdown, Image, Space, Typography } from 'antd';
-import { useContext } from 'react';
+import { Avatar, Button, Dropdown, Space, Typography } from 'antd';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import authApi from 'src/api/authApi';
+import {logout} from '../../../Redux/authSlice';
 
 // import AuthContext from 'src/routes/AuthContext';
+
+
 type NavbarLinkType = {
   title: string;
   linkTo: string;
@@ -16,13 +20,13 @@ const NavbarLinks: NavbarLinkType[] = [
     title: 'Trang chủ', linkTo: '/',
   },
   // {
-  //   title: 'Bán hàng',
+    //   title: 'Bán hàng',
   //   linkTo: '/ban-hang',
   //   subMenu: [
-  //     {
-  //       key: '1',
-  //       label: <Link to={'/ban-hang'}>Bán hàng</Link>,
-  //     },
+    //     {
+      //       key: '1',
+      //       label: <Link to={'/ban-hang'}>Bán hàng</Link>,
+      //     },
   //     {
   //       key: '2',
   //       label: <Link to={'/lich-su-ban-hang'}>Lịch sử bán hàng</Link>,
@@ -37,17 +41,22 @@ const NavbarLinks: NavbarLinkType[] = [
   { title: 'Tập huấn', linkTo: '/training' },
   { title: 'Thết bị', linkTo: '/device' },
   { title: 'Bẩy', linkTo: '/trap' },
-
+  
 ];
 function Header() {
+  const dispath = useDispatch()
   const navigate = useNavigate();
-  // const { logout } = useContext(AuthContext);
+  const logoutAcount = () => {
+    authApi.logout()
+    dispath(logout())
+    window.location.reload();
+  }
 
   const action: MenuProps['items'] = [
     {
       key: 'logout',
       label: (
-        <Space onClick={logout} style={{ width: '100%' }}>
+        <Space onClick={logoutAcount} style={{ width: '100%' }}>
           <LogoutOutlined />
           <Typography className='header-accountAction'>Đăng xuất</Typography>
         </Space>

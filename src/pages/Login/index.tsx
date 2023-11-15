@@ -12,7 +12,7 @@ import { Content, Footer } from 'antd/es/layout/layout';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { loginSuccess } from 'src/Redux/authSlice';
+import { login } from 'src/Redux/authSlice';
 import authApi from 'src/api/authApi';
 
 const Login: React.FC = () => {
@@ -29,7 +29,7 @@ const Login: React.FC = () => {
       if (res?.data) {
         localStorage.setItem('access_token', res.data.data.token);
         message.success('Đăng nhập thành công');
-        dispath(loginSuccess(res.data));
+        dispath(login(res.data));
         navigate('/')
       }
     } catch (error) {
