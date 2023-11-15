@@ -1,27 +1,123 @@
-import { Link } from "react-router-dom";
+import { LockOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import { Avatar, Button, Dropdown, Image, Space, Typography } from 'antd';
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Header = () => {
-    return ( 
-        <header className="bg-red-500 p-4">
-        <div className="container ">
-          <div className=" w-full flex justify-start items-center">
-            <h1 className="text-white text-2xl font-semibold mr-[4px]">
-                <div className="w-16 h-16 mr-2">
-                    <img className="w-full h-full" src="https://imgt.taimienphi.vn/cf/Images/huy/2022/7/22/logo-manchester-united-4.png" alt="" />
-                </div>
-               
-            </h1>
-            <nav className="space-x-4">
-              <Link to="/" className="text-white hover:underline">Trang chủ</Link>
-              <Link to="/employees" className="text-white hover:underline">Nhân viên</Link>
-              <Link to="/device" className="text-white hover:underline">Thiết bị</Link>
-              <Link to="/trap" className="text-white hover:underline">Bẩy</Link>
-              <Link to="/training" className="text-white hover:underline">Tập huấn</Link>
-            </nav>
-          </div>
+// import AuthContext from 'src/routes/AuthContext';
+type NavbarLinkType = {
+  title: string;
+  linkTo: string;
+  subMenu?: MenuProps['items'];
+};
+
+const NavbarLinks: NavbarLinkType[] = [
+  {
+    title: 'Trang chủ', linkTo: '/',
+  },
+  // {
+  //   title: 'Bán hàng',
+  //   linkTo: '/ban-hang',
+  //   subMenu: [
+  //     {
+  //       key: '1',
+  //       label: <Link to={'/ban-hang'}>Bán hàng</Link>,
+  //     },
+  //     {
+  //       key: '2',
+  //       label: <Link to={'/lich-su-ban-hang'}>Lịch sử bán hàng</Link>,
+  //     },
+  //     {
+  //       key: '3',
+  //       label: <Link to={'/danh-sach-khach-hang'}>Danh sách khách hàng</Link>,
+  //     },
+  //   ],
+  // },
+  { title: 'Nhân viên', linkTo: '/employees' },
+  { title: 'Tập huấn', linkTo: '/training' },
+  { title: 'Thết bị', linkTo: '/device' },
+  { title: 'Bẩy', linkTo: '/trap' },
+
+];
+function Header() {
+  const navigate = useNavigate();
+  // const { logout } = useContext(AuthContext);
+
+  const action: MenuProps['items'] = [
+    {
+      key: 'logout',
+      label: (
+        <Space onClick={logout} style={{ width: '100%' }}>
+          <LogoutOutlined />
+          <Typography className='header-accountAction'>Đăng xuất</Typography>
+        </Space>
+      ),
+    },
+  ];
+  const username = localStorage.getItem('userInfo')
+    ? JSON.parse(localStorage.getItem('userInfo') as string).HoTen
+    : '';
+  return (
+    <div className='sticky inset-x-0 top-0 z-[100] h-[60px] w-full bg-[#0090DA] shadow-md'>
+      <div className='mx-auto flex h-full w-full max-w-xl items-center justify-between px-4 xld:px-0'>
+        <div className='h-[50px] w-[50px]'>
+
         </div>
-      </header>
-    );
+        <div className='header-nav flex max-w-xl'>
+          {NavbarLinks.map((item, index) => {
+            return item.subMenu ? (
+              <Dropdown
+                menu={{ items: item.subMenu }}
+                key={index}
+                overlayClassName={'header-nav-dropdown'}
+              >
+                <Link
+                  to={item.linkTo}
+                  key={index}
+                className='transition-md rounded-md px-3 py-2 font-noto text-white hover:bg-[#0078b6]'
+                >
+                  {item.title}
+                </Link>
+              </Dropdown>
+            ) : (
+              <Link
+                to={item.linkTo}
+                key={index}
+                className='transition-md rounded-md px-3 py-2 font-noto text-white hover:bg-[#0078b6]'
+              >
+                {item.title}
+              </Link>
+            );
+          })}
+
+          <Dropdown
+            menu={{ items: action }}
+            trigger={['click']}
+            placement='bottomLeft'
+          >
+            <Space size={'small'} className='cursor-pointer'>
+              <Typography className='ml-8 text-base font-semibold text-white'>
+                {username}
+              </Typography>
+              <Button
+                shape='circle'
+                style={{
+                  backgroundColor: 'transparent',
+                  padding: '0',
+                  border: 'none',
+                }}
+              >
+                <Avatar
+                  className='account-avatar'
+                  src='https://xsgames.co/randomusers/avatar.php?g=pixel&key=1'
+                />
+              </Button>
+            </Space>
+          </Dropdown>
+        </div>
+      </div>
+    </div>
+  );
 }
- 
+
 export default Header;
