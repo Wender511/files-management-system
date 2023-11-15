@@ -48,7 +48,7 @@ function App() {
             <Routes>
               {authRoutes.map((route, index) => {
                 let Layout;
-                let Page = route.component;
+                let Page = LoginPage;
                 if (loginInfo.userData.data) {
                   Page = route.component;
                 } else if (loginInfo.userData.user == null) {

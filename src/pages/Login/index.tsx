@@ -19,17 +19,7 @@ const Login: React.FC = () => {
     const navigate = useNavigate();
   const [form] = Form.useForm();
   const dispath = useDispatch();
-  // const hanldeSubmitForm = async (values: any) => {
-  //   try {
-  //     const res = await authApi.login(values);
-  //     console.log(res);
-  //     dispath(loginSuccess(res.data));
-  //     localStorage.setItem('access_token', res.data.data.token);
-  //   } catch (error) {
-  //     console.log(error);
-  //     console.log('Có lỗi xảy ra');
-  //   }
-  // };
+
   const handleSubmitForm = async () => {
     try {
       await form.validateFields();
