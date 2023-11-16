@@ -11,3 +11,16 @@ export interface EmployeesProp {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface FileProps {
+  _id: string;
+  __v: number;
+  url: string;
+  type: string;
+  status: string;
+  owner: string;
+  name: string;
+  delete: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
