@@ -1,7 +1,7 @@
 import { LogoutOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Avatar, Button, Dropdown, Space, Typography } from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import authApi from 'src/api/authApi';
@@ -26,15 +26,25 @@ const NavbarLinks: NavbarLinkType[] = [
   { title: 'Thết bị', linkTo: '/device' },
   { title: 'Bẫy', linkTo: '/trap' },
 ];
+const NavbarManager: NavbarLinkType[] = [
+  { title: 'Trang chủ', linkTo: '/'},
+  { title: 'Nhân viên', linkTo: '/employees' },
+  { title: 'Tập huấn', linkTo: '/training' },
+  { title: 'Thết bị', linkTo: '/device' },
+  { title: 'Bẫy', linkTo: '/trap' },
+  { title: 'Cấp tài khoản', linkTo: '/createaccount' },
+];
 function Header() {
   const dispath = useDispatch()
   const navigate = useNavigate();
+  const [menu, setMenu] = useState(NavbarLinks)
   const checkrole: any = useSelector((state: rootReducer) => state.auth);
 useEffect(()=>{
   if(checkrole.userData.data.role == 'manager'){
-    NavbarLinks.push({title: 'Cấp tài khoản', linkTo: '/trap'})
+    setMenu(NavbarManager)
   }
-},[])
+})
+
   const logoutAcount = () => {
     authApi.logout()
     dispath(logout())
@@ -62,7 +72,7 @@ useEffect(()=>{
 
         </div>
         <div className='header-nav flex max-w-xl'>
-          {NavbarLinks.map((item, index) => {
+          {menu.map((item, index) => {
             return item.subMenu ? (
               <Dropdown
                 menu={{ items: item.subMenu }}
