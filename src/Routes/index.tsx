@@ -5,6 +5,7 @@ import EmpolyeesPage from '../pages/Employees/Employees';
 import Trap from '../pages/Trap';
 import Device from '../pages/Device';
 import Training from '../pages/Training';
+import CreateAccount from 'src/pages/CreateAccount';
 // Layout
 import { DefaultLayout, LoginLayout } from '../components/layout';
 const authRoutes = [
@@ -14,6 +15,7 @@ const authRoutes = [
   { path: '/training', component: Training, layout: DefaultLayout },
   { path: '/login', component: LoginPage, layout: LoginLayout },
   { path: '/employees', component: EmpolyeesPage, layout: DefaultLayout },
+  { path: '/createaccount', component: CreateAccount, layout: DefaultLayout },
   
 ];
 
